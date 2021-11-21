@@ -1,9 +1,9 @@
-import 'package:countries_world_map/world/simple_world/simple_world.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../i18n/language_controller.dart';
 import 'controller.dart';
+import '../../models/world_map/world_map/index.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -24,14 +24,19 @@ class HomePage extends GetView<HomeController> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Center(
-          child: Obx(
-            () => SimpleWorldMap(
-              callback: (countryCode, tapUpDetails) {
-                controller.toggleCountry(countryCode: countryCode);
-              },
-              countryColors: controller.simpleWorldCountryColors,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: InteractiveViewer(
+          maxScale: 75.0,
+          child: Center(
+            child: Obx(
+              () => WorldMap(
+                callback: (countryCode, tapUpDetails) {
+                  controller.toggleCountry(countryCode: countryCode);
+                },
+                countryColors: controller.simpleWorldCountryColors,
+              ),
             ),
           ),
         ),

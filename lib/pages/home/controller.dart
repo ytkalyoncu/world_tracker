@@ -1,17 +1,15 @@
 import 'dart:ui';
-
-import 'package:countries_world_map/world/simple_world/simple_world.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../i18n/language_controller.dart';
-import '../../utils/extension/simple_world_country_colors.dart';
+import '../../models/world_map/world_map/index.dart';
 
 class HomeController extends GetxController {
   final _coloredContries = RxMap<String, MaterialColor>();
 
   get simpleWorldCountryColors =>
-      const SimpleWorldCountryColors().fromMap(_coloredContries);
+      const WorldCountryColors().fromMap(_coloredContries);
 
   void toggleCountry({
     required String countryCode,
