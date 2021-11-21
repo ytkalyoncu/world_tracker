@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:touchable_canvas/touchable_canvas.dart';
 
-import '../canvas/src/canvas_touch_detector.dart';
 import 'world_colors.dart';
 import 'world_painter.dart';
 

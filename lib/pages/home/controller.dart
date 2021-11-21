@@ -1,9 +1,10 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:world_map/world_map.dart';
 
 import '../../i18n/language_controller.dart';
-import '../../models/world_map/world_map/index.dart';
 
 class HomeController extends GetxController {
   final _coloredContries = RxMap<String, MaterialColor>();

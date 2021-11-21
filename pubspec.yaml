@@ -21,7 +21,8 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_svg: ^0.23.0+1
   # World map
-  countries_world_map: ^0.0.6
+  world_map:
+    path: ./packages/world_map
 
 dev_dependencies:
   flutter_test:

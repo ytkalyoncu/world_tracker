@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-import '../canvas/touchable_canvas.dart';
+import 'package:flutter/material.dart';
+import 'package:touchable_canvas/touchable_canvas.dart';
+
 import 'world_colors.dart';
 
 /// This painter will paint a world map with all///
@@ -24,7 +26,7 @@ class WorldPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var worldCanvas = TouchyCanvas(context, canvas);
-    print('Repainting simple world map');
+    log('Repainting simple world map');
     Path path0 = Path();
     path0.moveTo(size.width * 0.6915000, size.height * 0.3052509);
     path0.lineTo(size.width * 0.6922500, size.height * 0.3073512);

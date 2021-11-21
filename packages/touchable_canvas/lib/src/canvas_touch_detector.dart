@@ -132,8 +132,8 @@ class TouchDetectionController extends InheritedWidget {
   StreamController<Gesture> get controller => _controller;
 
   const TouchDetectionController(this._controller, this.addListener,
-      {required Widget child})
-      : super(child: child);
+      {required Widget child, Key? key})
+      : super(child: child, key: key);
 
   static TouchDetectionController? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<TouchDetectionController>();

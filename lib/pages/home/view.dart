@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:world_map/world_map.dart';
 
 import '../../i18n/language_controller.dart';
 import 'controller.dart';
-import '../../models/world_map/world_map/index.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
