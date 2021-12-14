@@ -4,7 +4,7 @@ import 'package:world_map/world_map.dart';
 
 import '../../i18n/language_controller.dart';
 import 'controller.dart';
-import '../../utils/drawer.dart';
+import '../../components/drawer.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
