@@ -19,7 +19,8 @@ dependencies:
   get: ^4.3.8
   get_storage: ^2.0.3
   google_fonts: ^2.1.0
-  flutter_svg: ^0.23.0+1
+  # Utils
+  flag: ^5.0.1
   # World map
   world_map:
     path: ./packages/world_map

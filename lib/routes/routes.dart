@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../pages/country_list/index.dart';
 import '../pages/home/index.dart';
 
 part 'route_paths.dart';
@@ -14,6 +15,12 @@ class AppRoutes {
       name: Routes.home,
       page: () => const HomePage(),
       binding: HomeBinding(),
+      children: [
+        GetPage(
+          name: Routes.countryList,
+          page: () => const CountryListPage(),
+        ),
+      ],
     ),
   ];
 }

@@ -59,13 +59,10 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Country List'),
-            selectedTileColor: Colors.blue[100],
-            onTap: () {
-              //Get.toNamed(...);
-            },
-          ),
+              leading: const Icon(Icons.list),
+              title: const Text('Country List'),
+              selectedTileColor: Colors.blue[100],
+              onTap: () => Get.toNamed(Routes.countryList)),
           ListTile(
             leading: const Icon(Icons.table_chart),
             title: const Text('Statistics'),
