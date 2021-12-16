@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'canvas_touch_detector.dart';
