@@ -194,6 +194,7 @@ class WorldCountryColors {
 
   /// Algeria
   final Color? dZ;
+  
   // Ecuador
   final Color? eC;
 

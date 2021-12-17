@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/routes.dart';
+import '../constants.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -13,12 +14,18 @@ class MainDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue[900],
+            decoration: const BoxDecoration(
+              color: appBarColor,
             ),
             child: Column(
               children: [
-                const Text('World Tracker'),
+                const Text(
+                  'World Tracker',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
                 const Expanded(
                   child: SizedBox(),
                 ),

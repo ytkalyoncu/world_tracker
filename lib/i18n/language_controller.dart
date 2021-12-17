@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../constants/index.dart';
+import '../constants.dart';
 
 class LanguageController extends GetxController {
   Locale get locale => _language.value;
@@ -34,7 +34,7 @@ class LanguageController extends GetxController {
   void _setInitialLocalLanguage() {
     var storedLocale = _currentLanguageStore;
     if (storedLocale == null) {
-      var deviceLanguage = Get.deviceLocale ?? Globals.defaultLanguage;
+      var deviceLanguage = Get.deviceLocale ?? defaultLanguage;
       _language = deviceLanguage.obs;
       updateLanguage(deviceLanguage);
     } else {
