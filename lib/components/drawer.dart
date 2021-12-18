@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/routes.dart';
+import '../pages/home/controller.dart';
 import '../constants.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key? key}) : super(key: key);
+  MainDrawer({Key? key}) : super(key: key);
+
+  final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +35,31 @@ class MainDrawer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      'Been: 15',
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
+                    Obx(
+                      () => Text(
+                        'Been: ${controller.counter['been']}',
+                        style: const TextStyle(
+                          color: beenColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Want: 2',
-                      style: TextStyle(
-                        color: Colors.purple[300],
-                        fontWeight: FontWeight.bold,
+                    Obx(
+                      () => Text(
+                        'Want: ${controller.counter['want']}',
+                        style: const TextStyle(
+                          color: wantColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    const Text(
-                      'Favorite: 3',
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontWeight: FontWeight.bold,
+                    Obx(
+                      () => Text(
+                        'Favorite: ${controller.counter['fav']}',
+                        style: const TextStyle(
+                          color: favColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

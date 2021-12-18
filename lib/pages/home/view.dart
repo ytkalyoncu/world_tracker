@@ -31,7 +31,7 @@ class HomePage extends GetView<HomeController> {
         //   )
         // ],
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -66,36 +66,42 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  Column statsText() {
+  Widget statsText() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text(
+      children: [
+        const Text(
           'Countries:',
           style: TextStyle(
             color: Colors.grey,
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          'Been: 15',
-          style: TextStyle(
-            color: beenColor,
-            fontWeight: FontWeight.bold,
+        Obx(
+          () => Text(
+            'Been: ${controller.counter['been']}',
+            style: const TextStyle(
+              color: beenColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text(
-          'Want: 2',
-          style: TextStyle(
-            color: wantColor,
-            fontWeight: FontWeight.bold,
+        Obx(
+          () => Text(
+            'Want: ${controller.counter['want']}',
+            style: const TextStyle(
+              color: wantColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text(
-          'Favorite: 3',
-          style: TextStyle(
-            color: favColor,
-            fontWeight: FontWeight.bold,
+        Obx(
+          () => Text(
+            'Favorite: ${controller.counter['fav']}',
+            style: const TextStyle(
+              color: favColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -127,6 +133,8 @@ class HomePage extends GetView<HomeController> {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
                     '/flags/$countryFlagName.png',
+                    width: 100,
+                    height: 60,
                     fit: BoxFit.fill,
                   )),
               const SizedBox(width: 10),
@@ -141,13 +149,34 @@ class HomePage extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                child: bottomSheetCheckBox('Been', countryCode, beenColor),
+                child: Obx(
+                  () => bottomSheetCheckBox(
+                    'Been',
+                    countryCode,
+                    controller.countryList[countryCode]?.been ?? false,
+                    beenColor,
+                  ),
+                ),
               ),
               Expanded(
-                child: bottomSheetCheckBox('Want', countryCode, wantColor),
+                child: Obx(
+                  () => bottomSheetCheckBox(
+                    'Want',
+                    countryCode,
+                    controller.countryList[countryCode]?.want ?? false,
+                    wantColor,
+                  ),
+                ),
               ),
               Expanded(
-                child: bottomSheetCheckBox('Favorite', countryCode, favColor),
+                child: Obx(
+                  () => bottomSheetCheckBox(
+                    'Favorite',
+                    countryCode,
+                    controller.countryList[countryCode]?.fav ?? false,
+                    favColor,
+                  ),
+                ),
               ),
             ],
           ),
@@ -156,20 +185,23 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  Widget bottomSheetCheckBox(String text, String countryCode, Color color) {
+  Widget bottomSheetCheckBox(
+      String text, String countryCode, bool value, Color color) {
     return Theme(
       data: ThemeData(unselectedWidgetColor: color),
       child: CheckboxListTile(
-        activeColor: Colors.white,
-        checkColor: Colors.white,
-        tileColor: Colors.white,
+        activeColor: appBarColor,
+        checkColor: color,
+        // tileColor: Colors.white,
         title: Text(
           text,
           style: TextStyle(color: color),
         ),
-        value: false,
+        value: value,
         onChanged: (bool? val) {
-          controller.toggleCountry(countryCode: countryCode, color: color);
+          if (color == beenColor || color == wantColor) {
+            controller.toggleCountry(countryCode: countryCode, color: color);
+          }
         },
         controlAffinity: ListTileControlAffinity.leading,
         // contentPadding: const EdgeInsets.all(2), // This thing is not working

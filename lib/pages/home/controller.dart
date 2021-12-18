@@ -9,14 +9,24 @@ import '../../models/country.dart';
 class HomeController extends GetxController {
   final _coloredContries = RxMap<String, Color>();
 
-  final _countryList = <Country>[].obs;
-  get countryList => _countryList.toList();
+  final _countryList = <String, Country>{}.obs;
+  Map<String, Country> get countryList => _countryList;
 
   get worldCountryColors =>
       const WorldCountryColors().fromMap(_coloredContries);
 
-  void selectedCountry(){
-    
+  final _counter = RxMap<String, int>({'been': 0, 'want': 0, 'fav': 0});
+  Map<String, int> get counter => _counter;
+
+  void selectedCountry({
+    required String countryCode,
+    bool? been,
+    bool? want,
+    bool? fav,
+  }) {
+    bool _been = been ?? false;
+    bool _want = want ?? false;
+    bool _fav = fav ?? false;
   }
 
   void toggleCountry({
@@ -28,24 +38,32 @@ class HomeController extends GetxController {
     bool fav = false;
     if (color == beenColor) {
       been = true;
+      _counter['been'] = _counter['been']! + 1;
     }
     if (color == wantColor) {
       want = true;
+      _counter['want'] = _counter['want']! + 1;
     }
     if (color == favColor) {
       fav = true;
+      _counter['fav'] = _counter['fav']! + 1;
     }
-    var country = countryCode[0] + countryCode[1].toUpperCase();
-    if (_coloredContries.containsKey(country)) {
-      if (color == beenColor || color == wantColor) {
-        print('if');
-        _coloredContries.update(country, (value) => color);
-      }
+
+    if (_coloredContries.containsKey(countryCode)) {
+      //_coloredContries.update(country, (value) => color);
+      _coloredContries.remove(countryCode);
+      _countryList.remove(countryCode);
     } else {
-      print('else');
-      _countryList.add(Country(
-          code: country, name: country, been: been, want: want, fav: fav));
-      _coloredContries.addAll({country: color});
+      _countryList.addAll({
+        countryCode: Country(
+            code: countryCode,
+            name: countryCode.tr,
+            been: been,
+            want: want,
+            fav: fav),
+      });
+      _coloredContries.addAll({countryCode: color});
+      print(_countryList);
     }
   }
 

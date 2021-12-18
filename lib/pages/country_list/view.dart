@@ -13,7 +13,7 @@ class CountryListPage extends GetView<CountryListController> {
       appBar: AppBar(
         title: Text('countryList.title'.tr),
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(),
       body: const Center(
         child: Text('Country List'),
       ),
