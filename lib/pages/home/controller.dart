@@ -7,54 +7,45 @@ import '../../i18n/language_controller.dart';
 import '../../models/country.dart';
 
 class HomeController extends GetxController {
-  final _coloredContries = RxMap<String, Color>();
+  final _coloredContries = RxMap<String, Country>();
 
-  final _countryList = <String, Country>{}.obs;
-  Map<String, Country> get countryList => _countryList;
+  bool isBeen(String countryCode) =>
+      _coloredContries[countryCode]?.been ?? false;
+  bool isWant(String countryCode) =>
+      _coloredContries[countryCode]?.want ?? false;
+  bool isFav(String countryCode) => _coloredContries[countryCode]?.fav ?? false;
 
-  get worldCountryColors =>
-      const WorldCountryColors().fromMap(_coloredContries);
+  int get countBeen => _coloredContries.values.where((element) => element.been).length;
+  int get countWant => _coloredContries.values.where((element) => element.want).length;
+  int get countFav => _coloredContries.values.where((element) => element.fav).length;
 
-  final _counter = RxMap<String, int>({'been': 0, 'want': 0, 'fav': 0});
-  Map<String, int> get counter => _counter;
-
-  void selectedCountry({
-    required String countryCode,
-    bool? been,
-    bool? want,
-    bool? fav,
-  }) {
-    bool _been = been ?? false;
-    bool _want = want ?? false;
-    bool _fav = fav ?? false;
+  WorldCountryColors get worldCountryColors {
+    return const WorldCountryColors().fromMap(
+      _coloredContries.map(
+        (k, v) => MapEntry(
+            k,
+            v.been
+                ? beenColor
+                : v.want
+                    ? wantColor
+                    : v.fav
+                        ? favColor
+                        : null),
+      ),
+    );
   }
 
   void toggleCountry({
     required String countryCode,
-    required Color color,
+    required bool been,
+    required bool want,
+    required bool fav,
   }) {
-    bool been = false;
-    bool want = false;
-    bool fav = false;
-    if (color == beenColor) {
-      been = true;
-      _counter['been'] = _counter['been']! + 1;
-    }
-    if (color == wantColor) {
-      want = true;
-      _counter['want'] = _counter['want']! + 1;
-    }
-    if (color == favColor) {
-      fav = true;
-      _counter['fav'] = _counter['fav']! + 1;
-    }
 
     if (_coloredContries.containsKey(countryCode)) {
-      //_coloredContries.update(country, (value) => color);
       _coloredContries.remove(countryCode);
-      _countryList.remove(countryCode);
     } else {
-      _countryList.addAll({
+      _coloredContries.addAll({
         countryCode: Country(
             code: countryCode,
             name: countryCode.tr,
@@ -62,8 +53,6 @@ class HomeController extends GetxController {
             want: want,
             fav: fav),
       });
-      _coloredContries.addAll({countryCode: color});
-      print(_countryList);
     }
   }
 

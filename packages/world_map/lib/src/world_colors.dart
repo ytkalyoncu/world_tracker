@@ -1013,7 +1013,7 @@ class WorldCountryColors {
     this.zW,
   });
 
-  fromMap(Map<String, dynamic> map) {
+  fromMap(Map<String, Color?> map) {
     return WorldCountryColors(
       aD: map['aD'],
       aE: map['aE'],

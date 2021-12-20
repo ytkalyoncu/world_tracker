@@ -79,7 +79,7 @@ class HomePage extends GetView<HomeController> {
         ),
         Obx(
           () => Text(
-            'Been: ${controller.counter['been']}',
+            'Been: ${controller.countBeen}',
             style: const TextStyle(
               color: beenColor,
               fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class HomePage extends GetView<HomeController> {
         ),
         Obx(
           () => Text(
-            'Want: ${controller.counter['want']}',
+            'Want: ${controller.countWant}',
             style: const TextStyle(
               color: wantColor,
               fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class HomePage extends GetView<HomeController> {
         ),
         Obx(
           () => Text(
-            'Favorite: ${controller.counter['fav']}',
+            'Favorite: ${controller.countFav}',
             style: const TextStyle(
               color: favColor,
               fontWeight: FontWeight.bold,
@@ -153,7 +153,7 @@ class HomePage extends GetView<HomeController> {
                   () => bottomSheetCheckBox(
                     'Been',
                     countryCode,
-                    controller.countryList[countryCode]?.been ?? false,
+                    controller.isBeen(countryCode),
                     beenColor,
                   ),
                 ),
@@ -163,7 +163,7 @@ class HomePage extends GetView<HomeController> {
                   () => bottomSheetCheckBox(
                     'Want',
                     countryCode,
-                    controller.countryList[countryCode]?.want ?? false,
+                    controller.isWant(countryCode),
                     wantColor,
                   ),
                 ),
@@ -173,7 +173,7 @@ class HomePage extends GetView<HomeController> {
                   () => bottomSheetCheckBox(
                     'Favorite',
                     countryCode,
-                    controller.countryList[countryCode]?.fav ?? false,
+                    controller.isFav(countryCode),
                     favColor,
                   ),
                 ),
@@ -199,9 +199,12 @@ class HomePage extends GetView<HomeController> {
         ),
         value: value,
         onChanged: (bool? val) {
-          if (color == beenColor || color == wantColor) {
-            controller.toggleCountry(countryCode: countryCode, color: color);
-          }
+          controller.toggleCountry(
+            countryCode: countryCode,
+            been: text == 'Been',
+            want: text == 'Want',
+            fav: text == 'Favorite',
+          );
         },
         controlAffinity: ListTileControlAffinity.leading,
         // contentPadding: const EdgeInsets.all(2), // This thing is not working

@@ -37,7 +37,7 @@ class MainDrawer extends StatelessWidget {
                   children: [
                     Obx(
                       () => Text(
-                        'Been: ${controller.counter['been']}',
+                        'Been: ${controller.countBeen}',
                         style: const TextStyle(
                           color: beenColor,
                           fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class MainDrawer extends StatelessWidget {
                     ),
                     Obx(
                       () => Text(
-                        'Want: ${controller.counter['want']}',
+                        'Been: ${controller.countWant}',
                         style: const TextStyle(
                           color: wantColor,
                           fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class MainDrawer extends StatelessWidget {
                     ),
                     Obx(
                       () => Text(
-                        'Favorite: ${controller.counter['fav']}',
+                        'Been: ${controller.countFav}',
                         style: const TextStyle(
                           color: favColor,
                           fontWeight: FontWeight.bold,

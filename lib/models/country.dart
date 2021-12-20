@@ -9,6 +9,7 @@ class Country {
   // Upcoming features
   // String info;
   // String notes;
+  // Map date {'beenLog': {}, 'wantLog':{}}
 
   Country({
     required this.code,
